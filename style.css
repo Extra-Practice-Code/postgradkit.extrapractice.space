@@ -2,7 +2,7 @@
 
 :root{
     --xpgreen: #00943f;
-}
+    --text-color: black;
 
 body, html {
     margin: 0;
@@ -33,3 +33,167 @@ body, html {
     top: 40%;
     /* font-family: sans-serif; */
   }
+
+
+/* THE TOOLS */
+
+.tools {
+	display: block;
+	/* visibility: visible; */
+	z-index: 1;
+}
+
+.tool {
+	/* -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3)); */
+	/* filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.3)); */
+	cursor: cell;
+	position: absolute;
+	width: 4vw;
+	min-width: 40px;
+	display: block;
+	transform: translate(-50%, -50%);
+	z-index: 0;
+	transition: 0.1s;
+}
+
+
+.tool:hover {
+	/* -webkit-filter: drop-shadow(0px 0px 10px floralwhite); */
+	/* filter: drop-shadow(0px 0px 5px floralwhite); */
+	z-index: 4;
+}
+
+
+.tool img{
+	width: inherit;
+	min-width: 5vh;
+	transition: 0.1s;
+}
+
+.tool img:hover{
+	width: 12vw;
+	margin-left:-4vw;
+	margin-top:2vh;
+	z-index: 4;
+}
+
+
+/* THE POPUPS */
+
+.popup {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.1s;
+  font-size: 1.4em;
+  color: var(--text-color);
+
+}
+.popup:target {
+	visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}
+a.back {
+	display: block;
+	height: 100vh;
+	width: 100vw;
+	position:fixed;
+}
+
+.popup > div {
+    width: 400px;
+    position: absolute;
+    top: 47%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 2em;
+	/* padding-bottom: 0; */
+    background: floralwhite;
+	text-align: center;
+	height: 80vh;
+	overflow-y: scroll;
+	cursor: initial;
+}
+
+.shadow {
+	background-color: rgba(0,0,0,0.1);
+}
+
+div.bottom{
+	position: absolute;
+	height: 10vh;
+	padding-top:0;
+	top:82%;
+	background: linear-gradient(transparent 0%, floralwhite 100%);
+	overflow:visible;
+}
+
+.popup > div.bottom::after {
+  content: "";
+  position: absolute;
+  bottom: -49px;
+  left: 0;
+  width: 300px;
+  height: 0px;
+  border-left: 50px solid transparent;
+  border-right: 50px solid transparent;
+  border-top: 50px solid floralwhite;
+}
+
+:root{
+	--cardwidth: 90vw;
+}
+
+.card-close {
+  color: #aaa;
+  line-height: 50px;
+  font-size: 70%;
+  font-family: Arial, Helvetica, sans-serif;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 3em;
+  text-decoration: none;
+}
+
+.card-image{
+	width: 100%;
+	height: auto;
+	display: block;
+	margin: auto;
+}
+.white{
+	background-color: darkgreen;
+}
+
+.popup h2 {
+	font-size: 1.2em;
+	text-transform: capitalize;
+	font-weight: normal;
+}
+
+.popup p{
+	font-size: 0.8em;
+}
+
+h3 {
+	font-size: 0.6em;
+	font-weight: 100;
+	text-transform: uppercase;
+	letter-spacing: 0.1em;
+}
+
+h5 {
+	font-family: 'Times New Roman', Times, serif;
+	font-weight: 100;
+	font-size: 0.6em;
+	color: rgba(0,0,0,0.6);
+	margin-top: 5px;;
+}
