@@ -1,5 +1,11 @@
-html{
+*, *:before, *:after { box-sizing: border-box; }
 
+:root{
+    --xpgreen: #00943f;
+}
+
+html{
+    background: ;
 }
 
 body{
