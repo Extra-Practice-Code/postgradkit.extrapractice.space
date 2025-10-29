@@ -3,6 +3,7 @@
 :root{
     --xpgreen: #00943f;
     --text-color: black;
+}
 
 body, html {
     margin: 0;
