@@ -12,14 +12,51 @@
 </head>
 
 <body>
-    <header>
-        <h1>Post-Grad Kit</h1>
-        <h4>By Bettina x XP</h4>
-    </header>
+    <video id="webcam" autoplay muted playsinline></video>
+
+    <div class="content">
+        <header>
+            <h1>Post-Grad Kit</h1>
+            <h4>By Bettina x XP</h4>
+        </header>
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    </div>
 
 
-
-
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      const video = document.getElementById('bgVideo');
+      const streamURL = 'https://webcam-hoekvanholland.nl/pages/cameras/strand.php'; // Replace with a real stream URL
+  
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(streamURL);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamURL;
+        video.play();
+      }
+    </script>
 
 </body>
 </html>

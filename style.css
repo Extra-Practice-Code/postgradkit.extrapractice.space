@@ -4,10 +4,30 @@
     --xpgreen: #00943f;
 }
 
-html{
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
     background: lightblue;
-}
+  }
 
-body{
+  video#webcam {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;   
+  }
 
-}
+  /* Example foreground content */
+  .content {
+    position: relative;
+    z-index: 1;
+    color: white;
+    text-align: center;
+    top: 40%;
+    font-family: sans-serif;
+  }
