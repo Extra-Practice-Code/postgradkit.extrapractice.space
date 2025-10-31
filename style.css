@@ -127,15 +127,6 @@ a.back {
 	background-color: rgba(0,0,0,0.1);
 }
 
-div.bottom{
-	position: absolute;
-	height: 10vh;
-	padding-top:0;
-	top:82%;
-	background: linear-gradient(transparent 0%, floralwhite 100%);
-	overflow:visible;
-}
-
 :root{
 	--cardwidth: 90vw;
 }
