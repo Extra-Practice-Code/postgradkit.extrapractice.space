@@ -10,9 +10,7 @@ body, html {
     padding: 0;
     height: 100%;
     overflow: hidden;
-    background: lightblue;
-    background-image: url("maas.jpg");
-    background-size: cover;
+    background: white;
   }
 
   video#webcam {
