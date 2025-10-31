@@ -59,6 +59,22 @@ body, html {
 	transition: 0.1s;
 }
 
+.tool-background {
+	position: absolute;
+	width: 250%;
+	min-width: 12.5vh;
+	z-index: 0;
+	transform: translate(-30%, -30%);
+}
+
+.tool-icon {
+	position: relative;
+	width: inherit;
+	min-width: 5vh;
+	z-index: 1;
+	transition: 0.1s;
+}
+
 
 .tool:hover {
 	/* -webkit-filter: drop-shadow(0px 0px 10px floralwhite); */
@@ -67,13 +83,7 @@ body, html {
 }
 
 
-.tool img{
-	width: inherit;
-	min-width: 5vh;
-	transition: 0.1s;
-}
-
-.tool img:hover{
+.tool:hover .tool-icon{
 	width: 12vw;
 	margin-left:-4vw;
 	margin-top:2vh;
