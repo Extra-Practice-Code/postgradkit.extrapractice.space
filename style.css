@@ -136,18 +136,6 @@ div.bottom{
 	overflow:visible;
 }
 
-.popup > div.bottom::after {
-  content: "";
-  position: absolute;
-  bottom: -49px;
-  left: 0;
-  width: 300px;
-  height: 0px;
-  border-left: 50px solid transparent;
-  border-right: 50px solid transparent;
-  border-top: 50px solid floralwhite;
-}
-
 :root{
 	--cardwidth: 90vw;
 }
