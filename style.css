@@ -8,9 +8,16 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow: hidden;
+    height: 100vh;
+    width: 300vw; 
+    overflow-x: auto; /* i think its the horizontal thing */
+    overflow-y: hidden; /* and this for no verticality? */
     background: white;
+  }
+  
+  body {
+    display: flex;
+    flex-direction: row;
   }
 
   video#webcam {
@@ -23,18 +30,43 @@ body, html {
     z-index: -1;   
   }
 
-  /* Example foreground content */
+
   .content {
     position: relative;
     z-index: 1;
     color: white;
     text-align: center;
     top: 40%;
-    /* font-family: sans-serif; */
+    width: 300vw;
+    min-width: 300vw;
   }
+
+
+	.planted-o-top-left {
+		position: fixed;
+		top: 5%;
+		left: 5%;
+		max-width: 200px;
+		height: auto;
+		z-index: 1;
+		pointer-events: none;
+	}
+
+
+	.planted-o2-below-header {
+		position: fixed;
+		top: 15%;
+		left: 50%;
+		transform: translateX(-50%);
+		max-width: 300px;
+		height: auto;
+		z-index: 1;
+		pointer-events: none;
+	}
 
   header {
     color: blue;
+    font-size: 4em;
   }
 
 
@@ -42,7 +74,7 @@ body, html {
 
 .tools {
 	display: block;
-	/* visibility: visible; */
+	
 	z-index: 1;
 }
 
@@ -61,10 +93,10 @@ body, html {
 
 .tool-background {
 	position: absolute;
-	width: 250%;
-	min-width: 12.5vh;
+	width: 300%;
+	min-width: 15vh;
 	z-index: 0;
-	transform: translate(-30%, -30%);
+	transform: translate(-33%, -33%);
 }
 
 .tool-icon {
