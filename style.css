@@ -46,7 +46,7 @@ body, html {
 		position: fixed;
 		top: 5%;
 		left: 5%;
-		max-width: 200px;
+		max-width: 90px;
 		height: auto;
 		z-index: 1;
 		pointer-events: none;
@@ -58,7 +58,7 @@ body, html {
 		top: 15%;
 		left: 50%;
 		transform: translateX(-50%);
-		max-width: 300px;
+		max-width: 90px;
 		height: auto;
 		z-index: 1;
 		pointer-events: none;
@@ -66,7 +66,7 @@ body, html {
 
   header {
     color: blue;
-    font-size: 4em;
+    font-size: 1.5em;
   }
 
 
@@ -91,12 +91,21 @@ body, html {
 	transition: 0.1s;
 }
 
+#tool5-link {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
 .tool-background {
 	position: absolute;
 	width: 300%;
 	min-width: 15vh;
 	z-index: 0;
 	transform: translate(-33%, -33%);
+}
+
+#tool5-link .tool-background {
+	width: 390%;
+	transform: translate(-37%, -37%);
 }
 
 .tool-icon {
@@ -154,18 +163,40 @@ a.back {
 }
 
 .popup > div {
-    width: 400px;
-    position: absolute;
-    top: 47%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    padding: 2em;
+	width: 400px;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	padding: 2em;
 	/* padding-bottom: 0; */
-    background: floralwhite;
+	background: floralwhite;
 	text-align: center;
 	height: 80vh;
 	overflow-y: scroll;
 	cursor: initial;
+}
+
+/* Position TEMPOratur popup à côté du tool2 (left: 34%; top: 42%) */
+#TEMPOratur > div {
+	left: 45%;
+	top: 42%;
+	transform: translate(0, -50%);
+}
+
+/* Position tool1 popup à côté du tool1 (left: 92%; top: -8%) */
+#tool1 > div {
+	left: auto;
+	right: 10%;
+	top: 10%;
+	transform: translate(0, 0);
+}
+
+/* Position tool5 popup à côté du tool5 (left: 60%; top: 60%) */
+#tool5 > div {
+	left: 70%;
+	top: 60%;
+	transform: translate(0, -50%);
 }
 
 .shadow {
@@ -193,6 +224,11 @@ a.back {
 	height: auto;
 	display: block;
 	margin: auto;
+}
+
+/* Réduire uniquement l'image dans le popup Tool 5 */
+#tool5 .card-image {
+	width: 50%;
 }
 .white{
 	background-color: darkgreen;
