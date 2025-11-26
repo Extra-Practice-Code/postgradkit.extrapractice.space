@@ -1,0 +1,121 @@
+<!DOCTYPE html> 
+<html lang="eng"> 
+<head> 
+    <meta charset="UTF-8">
+    <link href="style.css?v=1.0" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Post-Grad Kit</title>    
+    <style>
+    
+    </style>
+</head>
+
+<body>
+    <video id="webcam" autoplay muted playsinline></video>
+
+    <div class="content">
+        <header>
+            <h1>Post-Grad Kit</h1>
+            <h4>By Bettina x XP</h4>
+        </header>
+
+   
+    <img src="images/planted'o.png" alt="planted'o" class="planted-o-top-left">
+    
+ 
+    <img src="images/planted'o2.png" alt="planted'o2" class="planted-o2-below-header">
+
+
+    <div class="tools">
+
+        <a href="#TEMPOratur" style="left: 34%; top: 42%;" class="tool">
+            <img src="images/bigtool2.png" alt="Tool background" class="tool-background">
+            <img src="images/tool2.png" alt="Tool icon" class="tool-icon">
+          </a>
+        
+          <div id="TEMPOratur" class="popup">
+            <a class="back" href="#"> </a>
+            <div>
+              <a href="#" class="card-close">X</a>
+              <img src="images/tool2.png" class="card-image" alt="Preservation tool">
+              <h3> to maintain degrees of freedom in interdependence </h3>
+              <h2> TEMPOrature protractor </h2>
+              <p> on the raft you managed to construct after leaving school with others, how to steer together, and how to do you collaborate without dissolving or loosing your voice and aims ? 
+              </p>
+              <p> each member of the raft has an individual heat flux sensor positioned on the helm. everybody has to touch the helm once in a while to keep their degree of freedom stable. As you hold the helm, your degree of freedom is calculated thanks to the tempo of the raft degree of movements and your personal heat. </p>
+              <p>°+1 a degree of freedom is gained,  °-1 a degree of freedom is lost,  °= degree is stable</p>
+              <img src="images/lcd.png" class="card-image" alt="LCD display">
+            </div>
+          </div>
+
+        <a href="#tool1" style="left: 92%; top: -8%;" class="tool">
+            <img src="images/bigtool1.png" alt="Tool background" class="tool-background">
+            <img src="images/tool1.png" alt="Tool icon" class="tool-icon">
+          </a>
+        
+          <div id="tool1" class="popup">
+            <a class="back" href="#"> </a>
+            <div>
+              <a href="#" class="card-close">X</a>
+              <img src="images/tool1.png" class="card-image" alt="Seamslistener tool">
+              <h3>to reflect on your practice and how it is aligned with your aims ?</h3>
+              <h2>Seamslistener</h2>
+              <p>a <i>point d’écoute </i>(listening spot), and its <i>renfort d’écoute</i> (listening reinforcement), are translations for the word "sheet" : the lower corners of a sail and its line used to change the direction.</p>
+              <p>on the <i>point d’écoute</i>, pass your fingers on the seams and stitched lines of a flowchart. Slide capacities touch sensors sewed in the sail aligned with the diagram’s workflow will detect and record your movements and compare it to the one before, and the one before that, and finally the one you were aiming at the first time you followed the path of the flowchart’s lines. </p>
+              <p>making you listen to the different directions you took before, and reflect on your own position and the possibilities within your reach.</p>
+              <img src="images/[NOM_IMAGE_BAS].png" class="card-image" alt="">
+            </div>
+          </div>
+
+
+
+    </div>
+   
+   
+        <!-- <iframe 
+        src="https://www.youtube.com/embed/Qk3n3SWze7I?si=ClhdA-PLnSCfs1ky"
+        frameborder="0"
+        allow="autoplay; encrypted-media"
+        allowfullscreen
+        style="position:fixed; top:0; left:0; width:100%; height:100%; z-index:-1; object-fit:cover;"
+        referrerpolicy="strict-origin-when-cross-origin">
+      </iframe> -->
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+   
+    </div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <script>
+      const video = document.getElementById('bgVideo');
+      const streamURL = 'https://www.youtube.com/live/Qk3n3SWze7I'; // Replace with a real stream URL
+  
+      if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(streamURL);
+        hls.attachMedia(video);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => video.play());
+      } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        video.src = streamURL;
+        video.play();
+      }
+    </script>
+
+</body>
+</html>

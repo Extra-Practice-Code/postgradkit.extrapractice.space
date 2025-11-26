@@ -9,10 +9,10 @@ body, html {
     margin: 0;
     padding: 0;
     height: 100vh;
-    width: 300vw; 
+    width: 150vw; 
     overflow-x: auto; /* i think its the horizontal thing */
     overflow-y: hidden; /* and this for no verticality? */
-    background: white;
+    background: transparent;
   }
   
   body {
@@ -20,14 +20,121 @@ body, html {
     flex-direction: row;
   }
 
-  video#webcam {
+  .background-image {
     position: fixed;
-    top: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80vw;
+    height: 80vh;
+    background-image: url('fondrem.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1;
+    pointer-events: none;
+  }
+
+ 
+  .scrolling-text-top {
+    position: fixed;
+    top: 5%;
     left: 0;
-    width: 100vw;
+    width: 150vw;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .scrolling-text-top span {
+    display: inline-block;
+    animation: scroll-left 20s linear infinite;
+    font-size: 1.2em;
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  /* Texte défilant en bas */
+  .scrolling-text-bottom {
+    position: fixed;
+    bottom: 5%;
+    left: 0;
+    width: 150vw;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .scrolling-text-bottom span {
+    display: inline-block;
+    animation: scroll-right 20s linear infinite;
+    font-size: 1.2em;
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  /* Texte défilant à gauche */
+  .scrolling-text-left {
+    position: fixed;
+    left: 2%;
+    top: 0;
     height: 100vh;
-    object-fit: cover;
-    z-index: -1;   
+    writing-mode: vertical-rl;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .scrolling-text-left span {
+    display: inline-block;
+    animation: scroll-down 20s linear infinite;
+    font-size: 1.2em;
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  /* Texte défilant à droite */
+  .scrolling-text-right {
+    position: fixed;
+    right: 2%;
+    top: 0;
+    height: 100vh;
+    writing-mode: vertical-rl;
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .scrolling-text-right span {
+    display: inline-block;
+    animation: scroll-up 20s linear infinite;
+    font-size: 1.2em;
+    color: #0066cc;
+    font-weight: bold;
+  }
+
+  @keyframes scroll-left {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  @keyframes scroll-right {
+    0% { transform: translateX(-50%); }
+    100% { transform: translateX(0); }
+  }
+
+  @keyframes scroll-down {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  @keyframes scroll-up {
+    0% { transform: translateY(-50%); }
+    100% { transform: translateY(0); }
   }
 
 
@@ -37,8 +144,8 @@ body, html {
     color: white;
     text-align: center;
     top: 40%;
-    width: 300vw;
-    min-width: 300vw;
+    width: 150vw;
+    min-width: 150vw;
   }
 
 
@@ -226,7 +333,7 @@ a.back {
 	margin: auto;
 }
 
-/* Réduire uniquement l'image dans le popup Tool 5 */
+/* thats to reduce the image of tool5 in the popup i think*/
 #tool5 .card-image {
 	width: 50%;
 }
