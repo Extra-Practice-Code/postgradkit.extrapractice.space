@@ -213,6 +213,16 @@ body, html {
   left: 25px;
 }
 
+#toolwind-link {
+  transform: translate(-50%, -50%) scale(0.5);
+}
+
+#toolwind-link .tool-icon {
+  position: relative;
+  top: -40px;
+  left: 30px;
+}
+
 .tool-background {
 	position: absolute;
 	width: 300%;
@@ -325,6 +335,13 @@ a.back {
 #toolacid > div {
 	left: 60%;
 	top: 50%;
+	transform: translate(0, -50%);
+}
+
+/* Position toolwind popup à côté du toolwind (left: 50%; top: 50%) */
+#toolwind > div {
+	left: 40%;
+	top: 35%;
 	transform: translate(0, -50%);
 }
 
