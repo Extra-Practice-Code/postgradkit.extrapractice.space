@@ -33,6 +33,8 @@
             grid-template-columns: 1fr 3fr 1fr;
             height: 100%;
         }
+
+        /* Matches */
         #construction #box-of-matches {
             display: flex;
             flex-flow: row nowrap;
@@ -68,6 +70,8 @@
             pointer-events: none;
             font-size: 15px;
         }
+
+        /* Map */
         #construction #map-container {
             /* background-color:mediumseagreen; */
         }
@@ -75,11 +79,23 @@
             position: relative;
             aspect-ratio: 1/1;
             border: 2px solid #000;
-            overflow: hidden;
-            background-image: url('carto.png');
-            background-position: center center;
-            /* background-repeat: no-repeat; */
+            overflow: auto;
         }
+        #construction #map-container #map img#map-image {
+            display: block;
+            width: 200%;
+            height: auto;
+        }
+        #construction #map-container #map #tools img {
+            position: absolute;
+            width: 10vw;
+            top: 40%;
+            left: 40%;
+        }
+
+
+
+        /* Explantation */
         #construction #explanation {
             text-align: center;
             /* background-color:olive; */
@@ -139,6 +155,10 @@
             </div>
             <div id="map-container">
                 <div id="map">
+                    <div id="tools">
+                        <img src="images/tools/bigtool2.png" alt="big tool numba 2">
+                    </div>
+                    <img src="carto.png" alt="Map" id="map-image">
                 </div>
             </div>
             <div id="explanation">
