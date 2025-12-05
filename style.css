@@ -203,13 +203,18 @@ body, html {
 }
 
 #tool5-link {
-  transform: translate(-50%, -50%) scale(0.5);
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+#toolacid-link {
+  transform: translate(-50%, -50%) scale(1.2);
 }
 
 #toolacid-link .tool-icon {
   position: relative;
   top: -30px;
   left: 25px;
+  width: 1.2em;
 }
 
 #toolwind-link {
