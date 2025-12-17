@@ -11,8 +11,8 @@ const bigtoolData = {
     text: 'To maintain degrees of freedom in interdependence.<p> on the raft you managed to construct after leaving school with others, how to steer together, and how do you collaborate without dissolving or loosing your voice and aims ? </p>  <p> each member of the raft has an individual heat flux sensor positioned on the helm. Everyone has to touch the helm once in a while to keep their degrees of freedom stable. As you hold the helm, your degree of freedom is calculated thanks to the tempo of the collective raft degree of movements and your personal heat. </p>  <p>°+1 a degree of freedom is gained,  °-1 a degree of freedom is lost,  °= degree is stable</p> <img src="images/lcd.png" class="card-image" alt="LCD display"></img>'
   },
   bigtool5: {
-    img: '<img src="images/tool5.png">',
-    title: 'Big Tool 5',
+    img: 'images/tool5.png',
+    title: 'Salinity microphone meter',
     text: `<p>Estuaries are the only ecosystem where water lines can exchange. This sharing area creates an exceptional biomass, where shared thoughts and speech between salty water (freelancers, past students) and fresh chlorine water (students or just graduated students) can take place in a perfect equal foot and anti-hierarchical environment, whose result is a rich spawning ground.</p><p>To know if you have reached the right sharing area and spot, use the salinity microphone meter : if the exchange zone is ideal, the microphone will set : <i>Time for live estuaries of consciousness !</i></p>`
   },
   bigtoolacid: {
@@ -37,7 +37,7 @@ const bigtoolData = {
   }
 };
 
-// Ajoute l'écouteur sur chaque image bigtool
+
 window.addEventListener('DOMContentLoaded', function() {
   document.querySelectorAll('#tools img').forEach(function(img) {
     const name = img.src.split('/').pop().replace('.png','');
