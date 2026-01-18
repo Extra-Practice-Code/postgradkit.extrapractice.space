@@ -1,211 +1,635 @@
-                 
- </html>
 <!DOCTYPE html>
-<html lang="en">
-<head> 
+<html lang="fr">
+    
+
+<!--  curieux que vous êtes à venir pointer votre nez ici.
+      site fait en 2spi pour le 3ème rendu, j'aurai aimé
+      faire différemment, mieux, mais bon. c pas trop en bordel remerciez-moi 
+            ~~bettina -->
+<head>
     <meta charset="UTF-8">
-    <title>new beginning</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carnet en ligne</title>
+    <link rel="icon" type="image/png" href="elsite.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        *, *:before, *:after { box-sizing: border-box; }
-        
-        body { 
-            /* background-color: greenyllow; */
-            height: 100dvh;
+        * {
             margin: 0;
-            padding: 10px;
+            padding: 0;
+            box-sizing: border-box;
         }
-        main {
-            display: grid;
-            display: flex;
-            flex-flow: column nowrap;
-            /* background-color:grey; */
+        html, body {
             height: 100%;
-        }
-        header { 
-            /* background-color: rgb(202, 166, 105); */
-        }
-        header h1 {  
-            /* background-color:yellow; */
-            margin: 0;
-            margin-bottom: 10px;
-            color:#ffd505ea;
-            font-family: "Neue-Helvetica", sans-serif;
-
-        }
-        #construction {
-            /* background-color: pink; */
-            display: grid;
-            grid-template-columns: 1fr 3fr 1fr;
-            height: 100%;
-        }
-
-        /* Matches */
-        #construction #box-of-matches {
-            display: flex;
-            flex-flow: row nowrap;
-            gap: 10px;
-        }
-        #construction #box-of-matches .match-container {
-            height: 100%;
-            position: relative;
-            /* background-color: rgba(0, 0, 255, 0.153); */
-            padding: 10px;
-        }
-        #construction #box-of-matches .match-container .match {
-            height: 100%;
-            width: 1px;
-            background-color:#000;
-            
-        }
-        #construction #box-of-matches .match-container:hover .match {
-            background-color: rgb(131, 2, 156);
-        }
-        #construction #box-of-matches .match-container:hover span.match-label {
-            color: rgb(131, 2, 156);
-        }
-        #construction #box-of-matches .match-container span.match-label {
-            display: inline-block;
-            width: max-content;
-            transform: rotate(-90deg);
-            transform-origin: top center;
-            text-align: center;
-            position: absolute;
-            left: calc(50% + 5px);
-            top: 50dvh;
-            transform: translateX(-50%) rotate(-90deg);
-            pointer-events: none;
-            font-size: 15px;
-        }
-
-        /* Map */
-        #construction #map-container {
-            /* background-color:mediumseagreen; */
-        }
-        #construction #map-container #map {
-            position: relative;
-            aspect-ratio: 1/1;
-            border: 2px solid #000;
-            overflow: auto;
-        }
-        #construction #map-container #map img#map-image {
-            display: block;
-            width: 200%;
-            height: auto;
-        }
-        #construction #map-container #map #tools img {
-            position: absolute;
-            width: 10vw;
-            transition: box-shadow 0.2s, border 0.2s;
-          
-        }
-        #construction #map-container #map #tools img:hover {
-            box-shadow: 0 0 0 1.5px #ffd505, 0 0 6px 1.5px #ffd50599;
-            border: 1.5px solid #ffd505;
-            top: 40%;
-            left: 40%;
-        }
-
-
-
-        /* Explantation */
-        #construction #explanation {
-            text-align: center;
-            font-family: 'sharpGrostek-book20', "Neue-Helvetica", sans-serif;
-            /* background-color:olive; */
-            max-width: 300px;
-            margin-left:15px;
-        }
-        #construction #explanation img {
             width: 100%;
+            overflow: hidden;
+        }
+        iframe#panorama {
+            width: 100vw;
+            height: 100vh;
+            border: none;
+            display: block;
+        }
+
+        .clickable-image {
+            position: absolute;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .clickable-image:hover {
+            transform: scale(1.05);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 500px;
+            max-width: 90vw;
+            max-height: 80vh;
+            background: #f5f5f7;
+            border-radius: 12px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .modal.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal-header {
+            background: linear-gradient(180deg, #e8e8e8 0%, #d0d0d0 100%);
+            padding: 10px 15px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #b3b3b3;
+            cursor: move;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 8px;
+        }
+
+        .modal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 1px solid rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-button.close {
+            background: linear-gradient(135deg, #ff5f57 0%, #ff3b30 100%);
+        }
+
+        .modal-button.minimize {
+            background: linear-gradient(135deg, #ffbd2e 0%, #ffaa00 100%);
+        }
+
+        .modal-button.maximize {
+            background: linear-gradient(135deg, #28c840 0%, #20b830 100%);
+        }
+
+        .modal-title {
+            flex: 1;
+            text-align: center;
+            font-size: 13px;
+            font-weight: 500;
+            color: #333;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .modal-content {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+            color: #1d1d1f;
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        #typing-text {
+            position: fixed;
+            bottom: 90px;
+            left: 80px;
+            max-width: calc(100vw - 100px);
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            transition: opacity 0.5s ease;
+        }
+
+        #typing-text.typing::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+       
+        #typing-text2 {
+            position: fixed;
+            bottom: 200px;
+            left: 80px;
+            max-width: calc(100vw - 100px);
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            transition: opacity 0.5s ease;
+        }
+
+        #typing-text2.typing::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+        }
+
+        
+        #typing-text3 {
+            position: fixed;
+            top: 20px;
+            left: 80px;
+            max-width: calc(100vw - 100px);
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            transition: opacity 0.5s ease;
+        }
+
+        #typing-text3.typing::after {
+            content: '|';
+            animation: blink 0.7s infinite;
+        }
+
+        #final-text {
+            display: none;
+            position: fixed;
+            bottom: 150px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 80vw;
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #papyrus-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: white;
+            z-index: 6000;
+            overflow-y: auto;
+            padding: 40px;
+            font-family: 'Roboto', sans-serif;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        #papyrus-content {
+            color: #333;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        #papyrus-content p {
+            margin-bottom: 20px;
+        }
+
+        #papyrus-content br {
+            display: block;
+            margin: 10px 0;
+            content: "";
+        }
+
+        #clickable-zone {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 370px;
+            height: 300px;
+            cursor: pointer;
+            z-index: 5500;
+            border: 2px dashed rgba(255, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #clickable-zone:hover {
+            border-color: rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        #additional-text4 {
+            display: none;
+            position: fixed;
+            bottom: 110px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 80vw;
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        #additional-text5 {
+            display: none;
+            position: fixed;
+            bottom: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            max-width: 80vw;
+            font-family: 'Roboto', sans-serif;
+            font-size: 24px;
+            font-weight: 400;
+            color: white;
+            z-index: 2000;
+            white-space: pre-wrap;
+            word-wrap: break-word;
         }
     </style>
-    
 </head>
+<body>
+   
+   <div id="typing-text">
+   </div>
+   <div id="typing-text2">
+   </div>
+   <div id="typing-text3">
+   </div>
 
-<script src="bigtool.js"></script>
-<body> 
-    <main> 
-        <header> 
-            <h1>Extra Practice's Pool Tool kit</h1>
-        </header>  
+   <div id="final-text">
+   </div>
 
-        <div id="construction"> 
-            <div id="box-of-matches">
-                <div class="match-container" style="margin-right: 13px;">
-                    <div class="match"></div>
-                    <span class="match-label">see what happens</span>
-                </div>
-                <div class="match-container">
-                    <div class="match"></div>
-                    <span class="match-label">to increase inter-generational exchanges</span>
-                </div>
-                <div class="match-container" style="margin-right: 20px;">
-                    <div class="match"></div>
-                    <span class="match-label">to increase inter-generational exchanges</span>
-                </div>
-                <div class="match-container">
-                    <div class="match"></div>
-                    <span class="match-label">...</span>
-                </div>
-                <div class="match-container">
-                    <div class="match"></div>
-                    <span class="match-label">to increase inter-generational exchanges</span>
-                </div>
-                <div class="match-container" style="margin-right: 10px;">
-                    <div class="match"></div>
-                    <span class="match-label">TEMPOrature protractor</span>
-                </div>
-                <div class="match-container">
-                    <div class="match"></div>
-                    <span class="match-label">to increase inter-generational exchanges</span>
-                </div>
-                <div class="match-container" style="margin-right: 18px;">
-                    <div class="match"></div>
-                    <span class="match-label">see what happens</span>
-                </div>
-                <div class="match-container" style="margin-right: 18px;">
-                    <div class="match"></div>
-                    <span class="match-label">to increase inter-generational exchanges</span>
-                </div>
-            </div>
-            <div id="map-container">
-                <div id="map">
-                    <div id="tools">
-                        <img src="images/bigtool1.png" alt="bigtool1" style="position:absolute;top:20%;left:140%;width:16vw;">
-                        <img src="images/bigtool2.png" alt="bigtool2" style="position:absolute;top:40%;left:20%;width:10vw;">
-                        <img src="images/bigtool5.png" alt="bigtool5" style="position:absolute;top:70%;left:50%;width:10vw;">
-                        <img src="images/bigtoolacid.png" alt="bigtoolacid" style="position:absolute;top:40%;left:120%;width:10vw;">
-                        <img src="images/bigtoolbreath.png" alt="bigtoolbreath" style="position:absolute;top:30%;left:90%;width:10vw;">
-                        <img src="images/bigtoolplow.png" alt="bigtoolplow" style="position:absolute;top:86%;left:70%;width:10vw;">
-                        <img src="images/bigtoolwind.png" alt="bigtoolwind" style="position:absolute;top:80%;left:40%;width:10vw;">
+   <div id="additional-text4">
+   </div>
+
+   <div id="additional-text5">
+   </div>
+
+   <!-- Zone cliquable au centre pour ouvrir le panneau -->
+   <div id="clickable-zone"></div>
+
+   <!-- Panel papyrus qui apparaît du haut -->
+   <div id="papyrus-panel">
+       <div id="papyrus-content">
+           <p>une statue de la Vierge Marie est érigée en août 2024 à Hawash en Syrie. Elle appartient à l'Eglise maronite. </p>
+<p>Cette statue a son site web dédié. <br> 
+Il sert de promontoire au site touristique, raconte les étapes de construction de la statue mêlé à un récit plus intime, journalier, de la communauté.<br> 
+Un récit de religosité qui vante une maîtrise technologique et technique. " Des médecins spécialisés dans les constructions python " <br>
+Un récit différent selon les interfaces de traductions automatiques et qui, par les erreurs, lapsus, devient un guide non plus uniquement de la statue, mais des interfaces de site-web que l'on utilise. Site². <br>
+Le site-web est en chantier, à peau nue. <br> 
+Ses superstructures sont du prêt à porter occidental, américain, du ciment moulé, des fautes de frappes, photos tumbleresques et oublis laissés, en décalage avec leur mise en valeur d'un imaginaire d'un Proche-Orient " lumineux ". Un imaginaire en essor chez les identitaires chrétiens occidentaux, celui d'un " Orient " qui viendrait secourir un " Occident" pour lui retrouver ses propre traditions dont il aurait perdu le sens, un retour à une terre sacré. 
+Cette terre se dématérialise et n'est foulée uniquement grâce aux sites hébergés en Occident. Il ne reste de marches en lieux saints, que les extraits de pieds qui jonchent les bas des photosphères prises par des utilisateurs. 
+ Innácéssible à pieds mais regard ubiquitaire en hauteur, l'icône d'accessibilité en manteau bleu marial dresse ses bras pour bénir. <br>
+J'utilise toutes les interfaces à portée de main pour traduire, situer. </p>
+
+<p> Et mon utilisation révèle des tropes et symboles propre à la représentation imaginaire du sacré dans l'utilisation même des interfaces standardisées d'internet. 
+Il y a un renversement, une complémentarité. C'est le corps de mon mémoire. </p>
+
+<p> La Vierge s'héberge partout. Les maronites vantent une planéité et une utilisation de cercle. L'orbe bleu de localisation. La Vierge est plate parceque Google ne survole plus cette zone de frontière Syrie-Liban. </p>
+
+<p> Si vous levez les yeux de la tour, de l'avion, ou même du satellite, vous verrez Al-ʿAdhrāʾ (la Vierge) donner une bénédiction au monde.
+Dominic était silencieux. Khalil souri. </p>
+
+<p> Un ciment numérique entre les templates préfabriqués et mon usage a la main bleu, cette aisance d'utiliser les interfaces préfabriqués. La reconstruction et contruction cimentée de la Syrie, des quartiers de la Vallée des Chrétiens qui se parent d'HLM ornés de croix. Le site-web fait de mon pelerinage en terre sainte un pelerinage en terre occidentale, des pied-à-terre sans poser pied, à l'instar de la Vierge dont les pieds ne sont pas sur les mêmes rapports de perspectives sur les peintures maronites. Je me construits un imaginaire sur cet imaginaire scindé et emmêlé de sédiments d'une narration d'un Orient et d'un Occident. </p>
+
+  &nbsp;  &nbsp; " From the West, the light of the East will come to you " <br>
+
+mais lorsqu'on èrre sur le site, on comprend que : <br>
+
+   &nbsp; &nbsp;  " From the East, the light of the West will come to you "
+
+<p> de droite à gauche, de gauche à droite, de l'arabe au français. Je visite cette statue avec les traductions, mouvement de translations, d'une langue à une autre, un site à un autre, copier coller, et cela enrichi les clichés, les titres du site sous mauvaise traduction automatiques deviennent un ramassis entre Al-quaida et le Seigneur des Anneaux. </p>
+</p>
+          
+       </div>
+   </div>
+
+   <!-- Onglet minimaliste pour ouvrir le papyrus -->
+   <div id="papyrus-tab"></div>
+
+   <!-- Panel papyrus qui s'ouvre vers la gauche -->
+   <div id="papyrus-panel">
+       <div id="papyrus-content">
+           <p>une statue de la Vierge Marie est érigée en août 2024 à Hawash en Syrie. Elle appartient à l'Eglise maronite. </p>
+<p>Cette statue a son site web dédié. <br><br>
+Il sert de promontoire au site touristique, raconte les étapes de construction de la statue mêlé à un récit plus intime, journalier, de la communauté.<br> 
+Un récit de religosité qui vante une maîtrise technologique et technique. " Des médecins spécialisés dans les constructions python " <br>
+Un récit différent selon les interfaces de traductions automatiques et qui, par les erreurs, lapsus, devient un guide non plus uniquement de la statue, mais des interfaces de site-web que l'on utilise. Site². <br><br>
+Le site-web est en chantier, à peau nue. <br> <br>
+Ses superstructures sont du prêt à porter occidental, américain, du ciment moulé, des fautes de frappes, photos tumbleresques et oublis laissés, en décalage avec leur mise en valeur d'un imaginaire d'un Proche-Orient " lumineux ". Un imaginaire en essor chez les identitaires chrétiens occidentaux, celui d'un " Orient " qui viendrait secourir un " Occident" pour lui retrouver ses propre traditions dont il aurait perdu le sens, un retour à une terre sacré. 
+Cette terre se dématérialise et n'est foulée uniquement grâce aux sites hébergés en Occident. Il ne reste de marches en lieux saints, que les extraits de pieds qui jonchent les bas des photosphères prises par des utilisateurs. 
+ Innacéssible à pieds mais regard ubiquitaire en hauteur, l'icône d'accessibilité en manteau bleu marial dresse ses bras pour bénir. <br>
+J'utilise toutes les interfaces à portée de main pour traduire, situer. </p> <br><br>
+
+<p> Et mon utilisation révèle des tropes et symboles propre à la représentation imaginaire du sacré dans l'utilisation même des interfaces standardisées d'internet. 
+Il y a un renversement, une complémentarité. C'est le corps de mon mémoire. </p> <br><br>
+
+<p> La Vierge s'héberge partout. Les maronites vantent une planéité et une utilisation de cercle. L'orbe bleu de localisation. La Vierge est plate parceque Google ne survole plus cette zone de frontière Syrie-Liban. </p> <br><br>
+
+<p> Si vous levez les yeux de la tour, de l'avion, ou même du satellite, vous verrez Al-ʿAdhrā' (la Vierge) donner une bénédiction au monde.
+Dominic était silencieux. Khalil souri. </p> <br><br>
+
+<p> Un ciment numérique entre les templates préfabriqués et mon usage a la main bleu, cette aisance d'utiliser les interfaces préfabriqués. La reconstruction et contruction cimentée de la Syrie, des quartiers de la Vallée des Chrétiens qui se parent d'HLM ornés de croix. Le site-web fait de mon pelerinage en terre sainte un pelerinage en terre occidentale, des pied-à-terre sans poser pied, à l'instar de la Vierge dont les pieds ne sont pas sur les mêmes rapports de perspectives sur les peintures maronites. Je me construits un imaginaire sur cet imaginaire scindé et emmêlé de sédiments d'une narration d'un Orient et d'un Occident. </p> <br><br>
+
+  &nbsp;  &nbsp; " From the West, the light of the East will come to you " <br>
+
+mais lorsqu'on èrre sur le site, on comprend que : <br>
+
+   &nbsp; &nbsp;  " From the East, the light of the West will come to you " <br><br>
+
+<p> de droite à gauche, de gauche à droite, de l'arabe au français. Je visite cette statue avec les traductions, mouvement de translations, d'une langue à une autre, un site à un autre, copier coller, et cela enrichi les clichés, les titres du site sous mauvaise traduction automatiques deviennent un ramassis entre Al-quaida et le Seigneur des Anneaux. </p>
+</p>
+          
+       </div>
+   </div>
+
+   <iframe id="panorama" src="https://www.google.com/maps/embed?pb=!4v1768172679683!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ0V3S2pmb0FF!2m2!1d34.76750512789452!2d36.33647428325438!3f220!4f0!5f0.7820865974627469" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+   <!-- je vais pas utiliser tout ça je pense à effacer si besoin 
+   <img src="ecran.png" class="clickable-image" style="top: 90px; left: 30%; width: 150px; height: 150px;" data-modal="modal1">
+   <img src="image2.jpg" class="clickable-image" style="top: 50px; right: 50px; width: 80px; height: 80px;" data-modal="modal2">
+   -->
+
+ 
+   <div class="modal-overlay" id="overlay"></div>
+
+   <!-- ça c les fenetres modales mais bon c pas terrible -->
+   <div class="modal" id="modal1" style="left: auto; right: 20px; top: 80px; transform: none;">
+       <div class="modal-header">
+           <div class="modal-buttons">
+               <div class="modal-button close" onclick="closeModal('modal1')"></div>
+               <div class="modal-button minimize"></div>
+               <div class="modal-button maximize"></div>
+           </div>
+           <div class="modal-title">los Informationnns</div>
+       </div>
+       <div class="modal-content">
+           <h2>un titre pour la fentre </h2>
+           <p></p>
+           <p></p>
+       </div>
+   </div>
+
+ 
+   <div class="modal" id="modal2">
+       <div class="modal-header">
+           <div class="modal-buttons">
+               <div class="modal-button close" onclick="closeModal('modal2')"></div>
+               <div class="modal-button minimize"></div>
+               <div class="modal-button maximize"></div>
+           </div>
+           <div class="modal-title">l'autre fenêtre</div>
+       </div>
+       <div class="modal-content">
+           <h2></h2>
+           <p></p>
+       </div>
+   </div>
+                   <!-- voilà là cest bien galère tt ça --> 
+   <script>
+       document.querySelectorAll('.clickable-image').forEach(img => {
+           img.addEventListener('click', function() {
+               const modalId = this.getAttribute('data-modal');
+               document.getElementById(modalId).classList.add('active');
+               document.getElementById('overlay').classList.add('active');
+           });
+       });
+
+       
+       function closeModal(modalId) {
+           document.getElementById(modalId).classList.remove('active');
+           document.getElementById('overlay').classList.remove('active');
+       }
+
+     
+       document.getElementById('overlay').addEventListener('click', function() {
+           document.querySelectorAll('.modal').forEach(modal => {
+               modal.classList.remove('active');
+           });
+           this.classList.remove('active');
+       });
+
+     
+       let activeModal = null;
+       let offsetX, offsetY;
+
+       document.querySelectorAll('.modal-header').forEach(header => {
+           header.addEventListener('mousedown', function(e) {
+               activeModal = this.parentElement;
+               const rect = activeModal.getBoundingClientRect();
+               offsetX = e.clientX - rect.left;
+               offsetY = e.clientY - rect.top;
+               
+               document.addEventListener('mousemove', moveModal);
+               document.addEventListener('mouseup', stopMove);
+           });
+       });
+                           
+       function moveModal(e) {
+           if (activeModal) {
+               activeModal.style.left = (e.clientX - offsetX) + 'px';
+               activeModal.style.top = (e.clientY - offsetY) + 'px';
+               activeModal.style.transform = 'none';
+           }
+       }
+
+       function stopMove() {
+           document.removeEventListener('mousemove', moveModal);
+           document.removeEventListener('mouseup', stopMove);
+           activeModal = null;
+       }
+
+      
+       const text = "vous êtes en Syrie, en face d'une statue de la Vierge Marie érigée en 2024. elle est à quelques km en face, tout droit. cette photosphère date de 2019, la statue n'existe pas encore. mais vous êtes pourtant là avec ce savoir"; // Modifiez ce texte
+       const typingElement = document.getElementById('typing-text');
+       let charIndex = 0;
+       const typingSpeed = 100; 
+       const pauseAfterSentence = 500;
+
+       function typeWriter() {
+           if (charIndex < text.length) {
+               typingElement.textContent = text.substring(0, charIndex + 1);
+               const currentChar = text[charIndex];
+               charIndex++;
+               
+               
+               const delay = currentChar === '.' ? typingSpeed + pauseAfterSentence : typingSpeed;
+               setTimeout(typeWriter, delay);
+           } else {
+              
+               typingElement.classList.remove('typing');
+               setTimeout(() => {
+                 
+                   if (window.innerWidth <= 768) {
+                       typingElement.textContent = '';
+                       setTimeout(() => {
+                           typingElement2.classList.add('typing');
+                           typeWriter2();
+                       }, 1000);
+                   } else {
                        
-                    </div>
-                    <img src="carto.png" alt="Map" id="map-image">
-                </div>
-            </div>
-            <div id="explanation">
-                <div>
-                    <img src="images/tool5.png" class="card-image" alt="Tool 5">
-                    <h3>to increase inter-generational exchanges</h3>
-                    <h2 style="pointer-events: auto;">salinity microphone</h2>
-                    <p>Estuaries are the only ecosystem where water lines can exchange. 
-                        This sharing area creates an exceptional biomass, 
-                        where shared thoughts and speech between salty water
-                        (freelancers, past students) and fresh chlorine water
-                    (students or just graduated students) can take place in a perfect 
-                        equal foot and anti-hierarchical environment, whose result is a rich
-                        spawning ground. </p>
-                    <p>To know if you have reached the right sharing 
-                        area and spot, use the salinity microphone meter : if the exchange zone
-                        is ideal, the microphone will set : 
-                        <i>Time for live estuaries of consciousness !</i>
-                    </p>
-                </div>
-            </div> 
-        </div>
-    </main> 
-</body>
+                       setTimeout(() => {
+                           typingElement2.classList.add('typing');
+                           typeWriter2();
+                       }, 10000);
+                   }
+               }, 10000);
+           }
+       }
 
+       window.addEventListener('load', () => {
+           setTimeout(() => {
+               typingElement.classList.add('typing');
+               typeWriter();
+           }, 5000);
+       });
+
+       const text2 = "regardez en bas. il y a les débris de nombreuses constructions de sites, le lieux où l'on retombe = un site-web en arabe : mawqi’ "; // Modifiez ce texte
+       const typingElement2 = document.getElementById('typing-text2');
+       let charIndex2 = 0;
+
+       function typeWriter2() {
+           if (charIndex2 < text2.length) {
+               typingElement2.textContent = text2.substring(0, charIndex2 + 1);
+               const currentChar = text2[charIndex2];
+               charIndex2++;
+               
+              
+               const delay = currentChar === '.' ? typingSpeed + pauseAfterSentence : typingSpeed;
+               setTimeout(typeWriter2, delay);
+           } else {
+               
+               typingElement2.classList.remove('typing');
+               setTimeout(() => {
+                   
+                   if (window.innerWidth <= 768) {
+                       typingElement2.textContent = '';
+                       setTimeout(() => {
+                           typingElement3.classList.add('typing');
+                           typeWriter3();
+                       }, 1000);
+                   } else {
+                       
+                       setTimeout(() => {
+                           typingElement3.classList.add('typing');
+                           typeWriter3();
+                       }, 10000);
+                   }
+               }, 10000);
+           }
+       }
+
+     
+       const text3 = "derrière il y a trois mecs qui matent leurs téls. a droite, il regarde le site dédié à la statue de la Vierge, l'autre tout à gauche, mon Hotglue où s'amoncelle mes errements et mes grands airs, et le troisième, la main dans la poche, est sur ce site, celui où vous êtes, là. il attend de pouvoir me saisir, de comprendre, puisqu'il va devenir impatient, comme vous. le résultat de s'entretenir complaisament dans son mémoire, dans ses obsessions. "; // Modifiez ce texte
+       const typingElement3 = document.getElementById('typing-text3');
+       let charIndex3 = 0;
+
+       function typeWriter3() {
+           if (charIndex3 < text3.length) {
+               typingElement3.textContent = text3.substring(0, charIndex3 + 1);
+               const currentChar = text3[charIndex3];
+               charIndex3++;
+               
+              
+               const delay = currentChar === '.' ? typingSpeed + pauseAfterSentence : typingSpeed;
+               setTimeout(typeWriter3, delay);
+           } else {
+              
+               typingElement3.classList.remove('typing');
+               
+               // Attendre 10 secondes après la fin du texte 3
+               setTimeout(() => {
+                   // Effacer les trois textes d'un coup
+                   typingElement.style.opacity = '0';
+                   typingElement2.style.opacity = '0';
+                   typingElement3.style.opacity = '0';
+                   
+                   // Afficher le texte final centré à la position du texte 2
+                   setTimeout(() => {
+                       document.getElementById('final-text').style.display = 'block';
+                       document.getElementById('final-text').textContent = 'zoomez sur le panneau du chantier';
+                       
+                       // Afficher les deux textes supplémentaires 8 secondes après le texte final
+                       setTimeout(() => {
+                           document.getElementById('additional-text4').style.display = 'block';
+                           document.getElementById('additional-text4').textContent = 'qui explique';
+                           
+                           document.getElementById('additional-text5').style.display = 'block';
+                           document.getElementById('additional-text5').textContent = 'qui se projette';
+                           
+                           // Afficher la zone cliquable 3 secondes après les textes additionnels
+                           setTimeout(() => {
+                               document.getElementById('clickable-zone').style.display = 'block';
+                           }, 3000);
+                       }, 8000);
+                   }, 500);
+               }, 10000);
+           }
+       }
+
+       // Gestion du clic sur la zone centrale pour rediriger vers un autre site
+       document.getElementById('clickable-zone').addEventListener('click', function() {
+           window.location.href = 'https://carnet.eur-artec.com/translation-dun-walkthrough-force-a-forced-visite-pas-a-pas/'; // Remplacez par l'URL de destination
+       });
+
+    
+   </script>
+</body>
 </html>
+
+
+
+
